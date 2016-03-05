@@ -9,6 +9,7 @@ class Jury
 
 	def add_member(member)
 		@members.push(member)
+		#puts "Members: #{@members}"
 	end
 
 	def cast_votes(finalists)
@@ -16,19 +17,19 @@ class Jury
 		finalists_hash = {}
 		finalists.each {|finalist| finalists_hash[finalist] = 0}
 
-		# puts each member
-		@members.each {|member| puts "Member: #{member.to_s.green}"}
-
-		# vote for finalists
-		keys = finalists_hash.keys
-		@members.each {|member| finalists_hash[keys[rand(2)]] += 1}
+		# puts each member vote
+		@members.each do |member|
+			vote_for = finalists.sample
+			puts "Member #{member.to_s.light_blue} votes for #{vote_for.to_s.green}"
+			finalists_hash[vote_for] += 1
+		end
 
 		# return result
 		finalists_hash
 	end
 
 	def report_votes(final_votes)
-		final_votes.each {|key, value| puts "Finalist #{key.to_s.blue}: #{value.to_s.pink}"}
+		final_votes.each {|key, value| puts "Finalist #{key.to_s.yellow}: #{value.to_s.pink}"}
 	end
 
 	def announce_winner(final_votes)

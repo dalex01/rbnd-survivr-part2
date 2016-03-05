@@ -12,7 +12,14 @@ class Tribe
 		@name
 	end
 
-	def tribal_council(to_eliminate)
-		@members.each {|member| return member if member != to_eliminate[:immune]}
+	def tribal_council(im)
+		if im
+			members_except_immune = @members.reject{|member| member == im[:immune]}
+		else
+			members_except_immune = @members
+		end
+		eliminated_member = members_except_immune.sample
+		@members.delete(eliminated_member)
+		eliminated_member
 	end
 end

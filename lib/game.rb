@@ -12,7 +12,7 @@ class Game
 	end
 
 	def immunity_challenge
-		@tribes[rand(2)]
+		@tribes.sample
 	end
 
 	def clear_tribes
@@ -22,10 +22,15 @@ class Game
 	def merge(name)
 		members = []
 		@tribes.each {|tribe| members += tribe.members}
-		Tribe.new({name: name, members: members})
+		merged_tribe = Tribe.new({name: name, members: members})
+
+		self.clear_tribes
+		self.add_tribe(merged_tribe)
+
+		merged_tribe
 	end
 
 	def individual_immunity_challenge
-		@tribes[0].members[0]
+		@tribes[0].members.sample
 	end
 end
