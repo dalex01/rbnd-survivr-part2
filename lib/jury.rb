@@ -17,7 +17,6 @@ class Jury
 		finalists.each {|finalist| finalists_hash[finalist] = 0}
 
 		# puts each member
-		puts "*"*20
 		@members.each {|member| puts "Member: #{member.to_s.green}"}
 
 		# vote for finalists
@@ -29,14 +28,12 @@ class Jury
 	end
 
 	def report_votes(final_votes)
-		puts "*"*20
 		final_votes.each {|key, value| puts "Finalist #{key.to_s.blue}: #{value.to_s.pink}"}
 	end
 
 	def announce_winner(final_votes)
 		winner = final_votes.max_by{|key, value| final_votes[key]}[0]
-		puts "*"*20
-		puts "The winner iiiiis: #{winner.to_s.red}"
+		puts "******************************\nThe winner iiiiis: #{winner.to_s.red}"
 		winner
 	end
 end
